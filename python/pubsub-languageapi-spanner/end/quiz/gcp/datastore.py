@@ -16,9 +16,20 @@ import os
 
 from google.cloud import datastore
 
+"""Grab the project id from environment variable
+"""
 project_id = os.getenv('GCLOUD_PROJECT')
+
 datastore_client = datastore.Client(project_id)
 
+"""list_entities
+
+Returns a list of question entities for a given quiz
+- filter by quiz name, defaulting to gcp
+- no paging
+- add in the entity key as the id property 
+- if redact is true, remove the correctAnswer property from each entity
+"""
 def list_entities(quiz='gcp', redact=True):
     query = datastore_client.query(kind='Question')
     query.add_filter('quiz', '=', quiz)

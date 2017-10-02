@@ -16,15 +16,27 @@ import re
 
 from google.cloud import spanner
 
+"""Get spanner management objects
+"""
 spanner_client = spanner.Client()
 instance = spanner_client.instance('quiz-instance')
 database = instance.database('quiz-database')
 
+"""reverse_email
+
+Takes an email address and reverses it (to be used as primary key)
+"""
 def reverse_email(email):
     return '_'.join(list(reversed(email.replace('@','_').
                         replace('.','_').
                         split('_'))))
 
+"""save_feedback
+
+Persists feedback data into Spanner
+- create primary key value
+- do a batch insert (even though it's a single record)
+"""
 def save_feedback(data):
     with database.batch() as batch:
         feedback_id = '{}_{}_{}'.format(reverse_email(data['email']),
