@@ -16,12 +16,13 @@ import json
 
 from flask import Response
 
-"""Import shared GCP helper modules
+"""
+Import shared GCP helper modules
 """
 from quiz.gcp import datastore, pubsub
 
-"""Get list of questions from datastore
-
+"""
+Gets list of questions from datastore
 - Create query
 - Filter on quiz
 - Call the datastore helper to get back JSON
@@ -36,8 +37,8 @@ def get_questions(quiz_name):
     response.headers['Content-Type'] = 'application/json'
     return response
 
-"""Grade submitted answers
-
+"""
+Grades submitted answers
 - Get list of questions with correct answers from datastore
 - Iterate through questions, find any submitted answers that match
 - Count total number of questions for which there is >0 correct answers
@@ -60,8 +61,8 @@ def get_grade(quiz_name, answers):
     response.headers['Content-Type'] = 'application/json'
     return response
 
-"""Publish feedback
-
+"""
+Publish feedback
 - Call pubsub helper
 - Compose and return response
 """

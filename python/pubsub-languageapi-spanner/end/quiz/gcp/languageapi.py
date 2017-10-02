@@ -18,8 +18,7 @@ from google.cloud.language import types
 
 lang_client = language.LanguageServiceClient()
 
-"""analyze 
-
+"""
 Returns sentiment analysis score
 - create document from passed text
 - do sentiment analysis using natural language applicable

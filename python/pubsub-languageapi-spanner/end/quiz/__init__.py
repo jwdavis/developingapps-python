@@ -11,12 +11,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-"""Setup flask
+"""
+Setup flask
 """
 from flask import Flask
 app = Flask(__name__, static_folder='static')
 
-"""Register blueprints for api and quiz
+"""
+Register blueprints for api and quiz
 """
 from quiz.api.routes import api_blueprint
 from quiz.webapp.routes import webapp_blueprint

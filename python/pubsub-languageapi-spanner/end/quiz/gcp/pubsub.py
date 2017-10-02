@@ -11,29 +11,27 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-import os
 import json
 import logging
+import os
+project_id = os.getenv('GCLOUD_PROJECT')
 
 from google.cloud import pubsub_v1
+from flask import current_app
 
-"""Create publisher and subscriber clients using new v1 API
+"""
+Create publisher and subscriber clients using new v1 API
 """
 publisher = pubsub_v1.PublisherClient()
 sub_client = pubsub_v1.SubscriberClient()
 
-"""Grab the project id from environment variable
 """
-project_id = os.getenv('GCLOUD_PROJECT')
-
-"""Construct paths to topic and subscription
+Construct paths to topic and subscription
 """
 topic_path = publisher.topic_path(project_id, 'feedback')
 sub_path = sub_client.subscription_path(project_id, 'worker-subscription')
 
-"""publish_feedback
-
+"""
 Publishes feedback info 
 - jsonify feedback object
 - encode as bytestring
