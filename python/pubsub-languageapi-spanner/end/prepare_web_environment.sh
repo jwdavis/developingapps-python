@@ -34,7 +34,7 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 echo "Creating Datastore entities"
-python setup/add_entities.py
+python add_entities.py
 
 echo "Creating quiz-account Service Account"
 gcloud iam service-accounts create quiz-account --display-name "Quiz Account"
